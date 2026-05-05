@@ -13,16 +13,20 @@ En tant que future candidate en école d'ingénieur et en pleine autoformation, 
 ### 1. moniteur_ddos.py — Détection et filtrage applicatif
 C'est le premier rempart technique. Ce script simule une analyse intelligente des flux pour différencier un pic de trafic normal d'une agression saturante de type ddos. Ce script se concentre sur l'analyse du taux de requêtes pour protéger la disponibilité du service.
 
-| Niveau | Seuil | Action Technique |
-|--------|-------|------------------|
-| ✅ **NORMAL** | < 500 req/sec | Surveillance passive et archivage des logs. |
-| ⚠️ **ALERTE** | 500 - 2000 req/sec | **Analyse active** : le script identifie les hausses suspectes en temps réel. |
-| 🚨 **CRITIQUE** | > 2000 req/sec | **Blocage** : Interruption du trafic pour éviter l'effondrement du serveur. |
+## Ce que fait le script
+- Simule le trafic reçu par un serveur bancaire seconde par seconde
+- Classe le trafic en trois niveaux : Normal, Alerte, Critique
+- Déclenche une action adaptée à chaque niveau
+
+## Les trois niveaux
+- ✅ NORMAL : surveillance passive (< 500 req/sec)
+- ⚠️ ALERTE : analyse active des logs en temps réel (500 - 2000 req/sec)
+- 🚨 CRITIQUE : blocage du trafic + équipe sécurité notifiée (> 2000 req/sec)
 
 ### 2. budget_cap.py — Protection contre l'EDoS (Economic Denial of Sustainability)
-Ce script traite de la dimension "Cloud" de la cybersécurité. Lors d'un DDoS, les systèmes d'auto-scaling peuvent créer des serveurs en boucle pour absorber l'attaque, faisant exploser la facture. C'est ce qu'on appelle un **EDoS** (Denial of Service financier).
+En parallèle, ce script vient traiter de la dimension "Cloud" de la cybersécurité. Lors d'un DDoS, les systèmes d'auto-scaling peuvent créer des serveurs en boucle pour absorber l'attaque, faisant exploser la facture. C'est ce qu'on appelle un **EDoS** (Denial of Service financier).
 
-Cette approche est directement inspirée de mon **Bootcamp AWS réalisé en Espagne**, où j'ai appris à manipuler les concepts de plafonnement budgétaire. Le script agit comme un "coupe-circuit" :
+Cette approche me permet de mobiliser des acquis de mon **Bootcamp AWS réalisé en Espagne**, où j'ai appris à manipuler les concepts de plafonnement budgétaire. Le script agit comme un "coupe-circuit" :
 - Il comptabilise les coûts engagés selon le trafic.
 - Il mesure les pertes évitées grâce au filtrage du premier script.
 - Il déclenche une alerte de sécurité si le plafond financier est atteint.
